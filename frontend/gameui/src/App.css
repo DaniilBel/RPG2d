@@ -1,0 +1,27 @@
+.App {
+  /* text-align: center; */
+
+  margin: 0 auto;
+  display: grid;
+
+  grid-template-areas:
+    "w c"
+    "w b";
+
+  grid-template-columns: 10fr 2fr;
+}
+
+.App-content {
+  grid-area: w;
+  background-color: cornflowerblue;
+}
+
+.App-chat {
+  grid-area: c;
+  background-color: red;
+}
+
+.App-buttons {
+  grid-area: b;
+  background-color: yellow;
+}

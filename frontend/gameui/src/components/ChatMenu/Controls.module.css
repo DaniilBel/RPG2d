@@ -1,0 +1,15 @@
+.controls_container {
+    text-align: center;
+}
+
+.movable {
+    position: absolute;
+}
+
+.controls {
+    /* margin-top: 10px; */
+}
+
+button {
+    margin-right: 5px;
+}
