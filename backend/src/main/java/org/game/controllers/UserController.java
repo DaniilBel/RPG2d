@@ -1,8 +1,12 @@
 package org.game.controllers;
 
 import org.game.datatmp.UserDAO;
+import org.game.datatmp.UserMapper;
 import org.game.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,11 +14,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/users")
 public class UserController {
     private final UserDAO userDAO;
+//    private UserMapper userMapper;
 
     @Autowired
     public UserController(UserDAO userDAO) {
@@ -25,6 +31,12 @@ public class UserController {
 //    Collection<User> users() {
 //        return null;
 //    }
+
+    @GetMapping(value = "/players", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<User>> getUsers() {
+        return new ResponseEntity<>(userDAO.index(), HttpStatus.OK);
+//        userDAO.index()
+    }
 
     @GetMapping()
     public String index(Model model) {

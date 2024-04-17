@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Игроки</title>
+</head>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+    }
+    #container {
+        display: flex;
+        height: 100vh;
+    }
+    #game-board {
+        flex: 1;
+        background-color: lightgray;
+        position: relative;
+    }
+    .player {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        /*background-image: url('player.png');*/
+        /*background-size: cover;*/
+    }
+    #player1 {
+        top: 50%;
+        left: 10%;
+    }
+</style>
+
+<body>
+
+<div id="container">
+    <div id="game-board">
+        <div class="player" id="player1">
+            <img src="player.png" alt="player"/>
+        </div>
+    </div>
+    <div id="player-info">
+        <div th:each="user : ${users}">
+            <a th:href="@{/users/{id}(id=${user.getId()})}"
+               th:text="${user.getNickname()}">user</a>
+        </div>
+        <hr/>
+        <a href="/users/new">Create new user</a>
+        <br/>
+    </div>
+</div>
+
+<script>
+    const player1 = document.getElementById('player1');
+    const speed = 15;
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+
+        // Player 1 Controls
+        if (key === 'w') {
+            movePlayer(player1, 0, -speed);
+        } else if (key === 's') {
+            movePlayer(player1, 0, speed);
+        } else if (key === 'a') {
+            movePlayer(player1, -speed, 0);
+        } else if (key === 'd') {
+            movePlayer(player1, speed, 0);
+        }
+    });
+
+    function movePlayer(player, x, y) {
+        const rect = player.getBoundingClientRect();
+        const newX = rect.left + x;
+        const newY = rect.top + y;
+
+        if (newX >= 0 && newY >= 0 && newX + rect.width <= window.innerWidth && newY + rect.height <= window.innerHeight) {
+            player.style.left = newX + 'px';
+            player.style.top = newY + 'px';
+        }
+    }
+</script>
+
+</body>
+</html>

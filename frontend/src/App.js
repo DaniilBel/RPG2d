@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Window from './components/GameWindow/Window';
 import Chat from './components/ChatMenu/Chat';
