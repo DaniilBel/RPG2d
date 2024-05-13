@@ -1,7 +1,8 @@
 import './App.css';
-import Window from './components/GameWindow/Window';
+
 import Chat from './components/ChatMenu/Chat';
-import Controls from './components/ChatMenu/Controls';
+import Controls from './components/Control/Controls';
+import Window from './components/GameWindow/Window';
 
 function App() {
   return (

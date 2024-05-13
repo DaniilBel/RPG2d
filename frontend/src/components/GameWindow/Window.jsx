@@ -1,33 +1,45 @@
 import React from 'react';
 import s from './Window.module.css';
+import bush from '../../assets/bush.png'
+import grass from '../../assets/grass.png'
+
+const mapLayout = [
+    ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+    ['#', '.', '.', '.', '#', '.', '.', '.', '#', '#'],
+    ['#', '.', '.', '.', '#', '.', '.', '.', '.', '#'],
+    ['#', '#', ',', '#', '#', '.', '.', '.', '.', '.'],
+    ['#', '#', '.', '#', '#', '.', '#', '#', '#', '#'],
+    ['#', '.', '.', '.', '.', '.', '.', '.', '#', '#'],
+    ['#', '.', '.', '.', '.', '.', '.', '.', '.', '#'],
+    ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+  ];
 
 const Window = () => {
-    const rows = 3;
-    const cols = 3;
-
-    const images = [];
-
-    for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-            images.push(
-                <img
-                    key={`${i}-${j}`}
-                    src="floor.png"
-                    alt={`floor ${i}-${j}`}
-                />
-            );
-        }
-    }
-
-
     return (
-        <div className={s.window_content}>
-            <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, 1fr)`, gridGap: 0 }}>
-                {/* <img src='floor.png' alt='' /> */}
-                {images}
+        <div>
+          {mapLayout.map((row, rowIndex) => (
+            <div key={rowIndex} style={{ display: 'flex' }}>
+              {row.map((cell, cellIndex) => (
+                <div
+                  key={cellIndex}
+                  style={{
+                    width: '50px',
+                    height: '50px',
+                    textAlign: 'center',
+                    lineHeight: '20px',
+                    border: '1px solid black',
+                    backgroundImage: `url(${cell === '#' ? bush : grass})`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                  }}
+                >
+                  
+                </div>
+              ))}
             </div>
+          ))}
         </div>
-    );
+      );
 }
 
 export default Window;
